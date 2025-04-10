@@ -1,0 +1,304 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --back-dark-color: #232946;
+  --title-dark-color: #fffffe;
+  --paragraph-dark-color: #c9ada7;
+  --card-dark-color: #fffffe;
+  --back-light-color: #d4d8f0;
+  --title-light-color: #232946;
+  --paragraph-light-color: #232946;
+  --card-light-color: #fffffe;
+  --button-color: #eebbc3;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.6rem;
+  background-color: #d4d8f0;
+  font-family: "Inter", sans-serif;
+}
+
+.pallet-dark {
+  background-color: var(--back-dark-color);
+}
+
+.pallet-dark h1,
+.pallet-dark h2,
+.pallet-dark h3,
+.pallet-dark h4,
+.pallet-dark h5,
+.pallet-dark h6 {
+  color: var(--title-dark-color);
+}
+
+.pallet-dark p {
+  color: var(--paragraph-dark-color);
+}
+
+.pallet-dark .card {
+  background-color: var(--card-dark-color);
+}
+
+.pallet-dark .card h2,
+.pallet-dark .card h3,
+.pallet-dark .card h4,
+.pallet-dark .card h5,
+.pallet-dark .card h6 {
+  color: var(--title-light-color);
+}
+.pallet-dark .card p {
+  color: var(--paragraph-light-color);
+}
+
+button{
+  background-color: var(--button-color);
+  color: var(--paragraph-light-color);
+}
+
+.pallet-light {
+  background-color: var(--back-light-color);
+}
+
+.pallet-light .card {
+  background-color: var(--card-light-color);
+}
+
+.card h2,
+.card h3,
+.card h4,
+.card h5,
+.card h6 {
+  color: var(--title-light-color);
+}
+.card p {
+  color: var(--paragraph-light-color);
+}
+
+.sections {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header-hero {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5%;
+}
+
+.content-hero {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.resumeCards {
+  width: 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.resumeCards:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  scale: 1.02;
+}
+
+.resumeCards__value {
+  /* font-size: 1.5rem; */
+  font-weight: bold;
+}
+
+.resumeCards .green-color {
+  color: #10b981;
+}
+
+.resumeCards .blue-color {
+  color: #3b82f6;
+}
+
+.resumeCards .red-color {
+  color: #ef4444;
+}
+
+table .green-color {
+  color: #10b981;
+}
+
+table .blue-color {
+  color: #3b82f6;
+}
+
+table .red-color {
+  color: #ef4444;
+}
+
+/* sectionForm */
+.sectionForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 4rem 0;
+}
+
+.sectionForm .form{
+  width: calc(100% - 4rem);
+  max-width: 50rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 3rem 5rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sectionForm .form__inputGroup{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sectionForm label {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--title-light-color);
+}
+
+.sectionForm input, .sectionForm select {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--paragraph-light-color);
+  font-size: 1.6rem;
+  color: var(--title-light-color);
+}
+
+.sectionForm input[type="button"] {
+  background-color: var(--card-light-color);
+  color: var(--title-light-color);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.sectionForm input[type="button"]:hover {
+  background-color: var(--title-light-color);
+  color: var(--card-light-color);
+  transform: scale(1.05);
+}
+
+/* sectionTransactions */
+
+.sectionTransactions {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 4rem 0;
+}
+
+.sectionTransactions__filter{
+  width: calc(100% - 4rem);
+  max-width: 60rem;
+  /* max-width: 50rem; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sectionTransactions__filter button {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--paragraph-light-color);
+  font-size: 1.6rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.sectionTransactions__filter button:hover {
+  background-color: var(--card-light-color);
+  color: var(--title-light-color);
+  transform: scale(1.05);
+}
+
+.content-table{
+  width: 99%;
+  max-width: 60rem;
+  max-height: 35rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 2rem 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.content-table::-webkit-scrollbar {
+  display: none;
+}
+
+.sectionTransactions__table{
+  width: 100%;
+  /* max-width: 50rem; */
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--card-light-color);
+  border-collapse: collapse;
+}
+
+.sectionTransactions__table th, .sectionTransactions__table td {
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid var(--paragraph-light-color);
+  font-size: 1.6rem;
+}
+
+.sectionTransactions__tableHeader {
+  font-weight: bold;
+  flex: 1;
+}
+
+.sectionTransactions__table button{
+  padding: .5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--paragraph-light-color);
+  font-size: 1.6rem;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.sectionTransactions__table button:hover {
+  background-color: var(--card-light-color);
+  color: var(--title-light-color);
+  transform: scale(1.05);
+}

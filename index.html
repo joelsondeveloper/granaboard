@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>granaboard</title>
+
+    <link rel="stylesheet" href="style/style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="sectionHero sections">
+      <header class="header-hero pallet-dark">
+        <h1 class="header-hero__title">granaboard</h1>
+        <div class="header__lightMode">
+          <input
+            type="checkbox"
+            id="lightMode"
+            class="lightMode__checkbox"
+            checked
+          />
+          <label for="lightMode" class="lightMode__circle"></label>
+        </div>
+      </header>
+      <section class="content-hero pallet-light">
+        <article class="resumeCards card">
+          <h2 class="resumeCards__title">Saldo Atual</h2>
+          <p class="resumeCards__value green-color" id="resumeCards__saldo">R$ 3.250,00</p>
+          <p class="resumeCards__description">Total disponível após despesas</p>
+        </article>
+        <article class="resumeCards card">
+          <h2 class="resumeCards__title">Total de Entradas</h2>
+          <p class="resumeCards__value blue-color" id="resumeCards__entrada">R$ 4.500,00</p>
+          <p class="resumeCards__description">Receitas no mês</p>
+        </article>
+        <article class="resumeCards card">
+          <h2 class="resumeCards__title">Total de Saidas</h2>
+          <p class="resumeCards__value red-color" id="resumeCards__saida">R$ 1.250,00</p>
+          <p class="resumeCards__description">Gastos no mês</p>
+        </article>
+      </section>
+    </div>
+
+    <div class="sectionForm sections pallet-dark">
+      <form action="#" class="form card" id="form">
+        <h2 class="form__title">Adicionar Transação</h2>
+        <div class="form__inputGroup">
+          <label for="type" class="form__label">Tipo de transação</label>
+          <select name="type" id="type" required>
+            <option value="" disabled selected>Selecione o tipo</option>
+            <option value="Entrada">Entrada</option>
+            <option value="Saída">Saída</option>
+          </select>
+        </div>
+        <div class="form__inputGroup">
+          <label for="description" class="form__label">Descrição</label>
+          <input
+            type="text"
+            id="description"
+            class="form__input"
+            placeholder="Ex: Salário, Aluguel, etc."
+            required
+          />
+        </div>
+        <div class="form__inputGroup">
+          <label for="value" class="form__label">Valor</label>
+          <input
+            type="number"
+            id="value"
+            class="form__input"
+            placeholder="Ex: 100,00"
+            required
+          />
+        </div>
+        <div class="form__inputGroup">
+          <label for="date" class="form__label">Data</label>
+          <input type="date" id="date" class="form__input" required />
+        </div>
+        <div class="form__inputGroup">
+          <label for="category" class="form__label">Categoria</label>
+          <select name="category" id="category" required>
+            <option value="" disabled selected>Selecione a categoria</option>
+            <option value="alimentacao">Alimentação</option>
+            <option value="transporte">Transporte</option>
+            <option value="saude">Saúde</option>
+            <option value="lazer">Lazer</option>
+            <option value="educacao">Educação</option>
+          </select>
+        </div>
+        <div class="form__inputGroup">
+          <label for="metody" class="form__label">Metodo de pagamento</label>
+          <select name="metody" id="metody" required>
+            <option value="" disabled selected>Selecione o método</option>
+            <option value="cartao">Cartão de Crédito</option>
+            <option value="debito">Cartão de Débito</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="transferencia">Transferência</option>
+          </select>
+        </div>
+        <input type="button" value="Adicionar" class="form__submit" onclick="adicionarTransacao()" preventDefault()/>
+      </form>
+    </div>
+
+    <div class="sectionTransactions sections" id="sectionTransactions">
+      <h2 class="sectionTransactions__title">Transações</h2>
+      <div class="sectionTransactions__filter pallet-dark">
+        <button onclick="filtrarTransacoes('Todos')">todos</button>
+        <button onclick="filtrarTransacoes('Saída')">saidas</button>
+        <button onclick="filtrarTransacoes('Entrada')">entradas</button>
+      </div>
+      <div class="content-table">
+        <table class="sectionTransactions__table card">
+          <thead>
+            <tr class="sectionTransactions__tableHeader">
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th>Tipo</th>
+              <th>Data</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="transactionsTableBody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="table.js"></script>
+  </body>
+</html>
