@@ -1,65 +1,4 @@
-const transacoes = [
-  {
-    descricao: "Salário",
-    valor: 4500,
-    tipo: "Entrada",
-    data: "2023-10-01",
-  },
-  {
-    descricao: "Aluguel",
-    valor: -1250,
-    tipo: "Saída",
-    data: "2023-10-05",
-  },
-  {
-    descricao: "Freelance Site",
-    valor: 800,
-    tipo: "Entrada",
-    data: "2023-10-10",
-  },
-  {
-    descricao: "Supermercado",
-    valor: -350,
-    tipo: "Saída",
-    data: "2023-10-12",
-  },
-  {
-    descricao: "Venda de notebook",
-    valor: 1500,
-    tipo: "Entrada",
-    data: "2023-10-15",
-  },
-  {
-    descricao: "Cinema",
-    valor: -60,
-    tipo: "Saída",
-    data: "2023-10-16",
-  },
-  {
-    descricao: "Reembolso empresa",
-    valor: 300,
-    tipo: "Entrada",
-    data: "2023-10-17",
-  },
-  {
-    descricao: "Academia",
-    valor: -120,
-    tipo: "Saída",
-    data: "2023-10-18",
-  },
-  {
-    descricao: "Presente de aniversário",
-    valor: 250,
-    tipo: "Entrada",
-    data: "2023-10-19",
-  },
-  {
-    descricao: "Gasolina",
-    valor: -200,
-    tipo: "Saída",
-    data: "2023-10-20",
-  },
-];
+let transacoes;
 
 const table = document.getElementById("transactionsTableBody");
 
@@ -75,20 +14,20 @@ function filtrarTransacoes(tipo) {
 }
 
 function adicionarTransacao() {
-    const tipo = document.getElementById("type").value;
-    const descricao = document.getElementById("description").value;
-    const valor = parseFloat(document.getElementById("value").value);
-    const data = document.getElementById("date").value;
+  const tipo = document.getElementById("type").value;
+  const descricao = document.getElementById("description").value;
+  const valor = parseFloat(document.getElementById("value").value);
+  const data = document.getElementById("date").value;
 
-    const novaTransacao = {
-        descricao,
-        valor,
-        tipo,
-        data
-    };
+  const novaTransacao = {
+    descricao,
+    valor,
+    tipo,
+    data,
+  };
 
-    transacoes.push(novaTransacao);
-    criarLinhaDaTabela(novaTransacao);
+  transacoes.push(novaTransacao);
+  criarLinhaDaTabela(novaTransacao);
 }
 
 function criarLinhaDaTabela(el) {
@@ -101,36 +40,86 @@ function criarLinhaDaTabela(el) {
                 <td><button class="deleteButton">Excluir</button></td>
             `;
   table.appendChild(row);
+  atualizarResumo();
 }
 
 function atualizarResumo() {
-    const saldoInput = document.getElementById("resumeCards__saldo")
-    const entradaInput = document.getElementById("resumeCards__entrada")
-    const saidaInput = document.getElementById("resumeCards__saida")
+  if (!transacoes) {
+    const salvas = localStorage.getItem("transacoes");
+    if (salvas) {
+      transacoes = JSON.parse(salvas);
+    }
+  }
+  const saldoInput = document.getElementById("resumeCards__saldo");
+  const entradaInput = document.getElementById("resumeCards__entrada");
+  const saidaInput = document.getElementById("resumeCards__saida");
 
-    let entrada = transacoes.reduce( function(acc, atual) {
-        if (atual.tipo == "Entrada") {
-            return acc + atual.valor
-        }
-        return acc
-    }, 0)
+  let entrada = transacoes.reduce(function (acc, atual) {
+    if (atual.tipo == "Entrada") {
+      return acc + atual.valor;
+    }
+    return acc;
+  }, 0);
 
-    entradaInput.textContent = `R$ ${entrada}`
+  let saida = transacoes.reduce(function (acc, atual) {
+    if (atual.tipo == "Saída") {
+      return acc + atual.valor;
+    }
+    return acc;
+  }, 0);
 
-    let saida = transacoes.reduce( function(acc, atual) {
-        if (atual.tipo == "Saída") {
-            return acc + atual.valor
-        }
-        return acc
-    }, 0)
+  entradaInput.textContent = `R$ ${entrada}`;
 
-    entradaInput.textContent = `R$ ${entrada}`
+  saidaInput.textContent = `R$ ${saida}`;
 
-    saidaInput.textContent = `R$ ${saida}`
+  const saldo = entrada - saida * -1;
+  saldoInput.textContent = `R$ ${saldo}`;
 
-    saldoInput.textContent = `R$ ${entrada + saida}`
-
+  if (saldo >= 0) {
+    saldoInput.className = "resumeCards__value green-color";
+  } else {
+    saldoInput.className = "resumeCards__value red-color";
+  }
+  renderizarGrafico();
+  localStorage.setItem("transacoes", JSON.stringify(transacoes));
 }
 
-atualizarResumo()
-filtrarTransacoes("Todos")
+let meuGrafico;
+
+function renderizarGrafico() {
+  const ctx = document.getElementById("chartTransacoes").getContext("2d");
+
+  if (meuGrafico) {
+    meuGrafico.destroy();
+  }
+
+  const entrada = transacoes.reduce(
+    (acc, atual) => (atual.tipo === "Entrada" ? acc + atual.valor : acc),
+    0
+  );
+  const saida = transacoes.reduce(
+    (acc, atual) => (atual.tipo === "Saída" ? acc + atual.valor : acc),
+    0
+  );
+
+  meuGrafico = new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: ["Entradas", "Saídas"],
+      datasets: [
+        {
+          label: "Resumo Financeiro",
+          data: [entrada, saida],
+          backgroundColor: ["#10b981", "#ef4444"],
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: false,
+    },
+  });
+}
+
+atualizarResumo();
+filtrarTransacoes("Todos");
