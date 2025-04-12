@@ -31,17 +31,17 @@
       <section class="content-hero pallet-light">
         <article class="resumeCards card">
           <h2 class="resumeCards__title">Saldo Atual</h2>
-          <p class="resumeCards__value green-color" id="resumeCards__saldo">R$ 3.250,00</p>
+          <p class="resumeCards__value green-color" id="resumeCards__saldo"></p>
           <p class="resumeCards__description">Total disponível após despesas</p>
         </article>
         <article class="resumeCards card">
           <h2 class="resumeCards__title">Total de Entradas</h2>
-          <p class="resumeCards__value blue-color" id="resumeCards__entrada">R$ 4.500,00</p>
+          <p class="resumeCards__value blue-color" id="resumeCards__entrada"></p>
           <p class="resumeCards__description">Receitas no mês</p>
         </article>
         <article class="resumeCards card">
           <h2 class="resumeCards__title">Total de Saidas</h2>
-          <p class="resumeCards__value red-color" id="resumeCards__saida">R$ 1.250,00</p>
+          <p class="resumeCards__value red-color" id="resumeCards__saida"></p>
           <p class="resumeCards__description">Gastos no mês</p>
         </article>
       </section>
@@ -135,6 +135,9 @@
       <h2>Graficos</h2>
       <canvas id="chartTransacoes" width="400" height="300"></canvas>
     </div>
+
+    <div id="toast" class="toast">Transação adicionada com sucesso!</div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

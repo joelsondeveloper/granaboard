@@ -302,3 +302,23 @@ table .red-color {
   color: var(--title-light-color);
   transform: scale(1.05);
 }
+
+/* toast */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #333;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 999;
+}
+
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+}

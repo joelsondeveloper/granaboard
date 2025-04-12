@@ -28,16 +28,18 @@ function adicionarTransacao() {
 
   transacoes.push(novaTransacao);
   criarLinhaDaTabela(novaTransacao);
+  mostrarToast("Transação adicionada com sucesso!");
 }
 
 function criarLinhaDaTabela(el) {
   const row = document.createElement("tr");
+  const index = transacoes.indexOf(el);
   row.innerHTML = `
                 <td>${el.descricao}</td>
                 <td>${el.valor}</td>
                 <td>${el.tipo}</td>
                 <td>${el.data}</td>
-                <td><button class="deleteButton">Excluir</button></td>
+                <td><button class="deleteButton" data-id="${index}" onclick="if(confirm('Tem certeza que deseja excluir?')) excluirTransacao(${index})">Excluir</button></td>
             `;
   table.appendChild(row);
   atualizarResumo();
@@ -72,7 +74,7 @@ function atualizarResumo() {
 
   saidaInput.textContent = `R$ ${saida}`;
 
-  const saldo = entrada - saida * -1;
+  const saldo = entrada + saida;
   saldoInput.textContent = `R$ ${saldo}`;
 
   if (saldo >= 0) {
@@ -120,6 +122,24 @@ function renderizarGrafico() {
     },
   });
 }
+
+function excluirTransacao(index) {
+  transacoes.splice(index, 1);
+  atualizarResumo();
+  filtrarTransacoes("Todos");
+  mostrarToast("Transação excluida com sucesso!");
+}
+
+function mostrarToast(mensagem) {
+  const toast = document.getElementById("toast");
+  toast.textContent = mensagem;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 3000); // esconde depois de 3 segundos
+}
+
 
 atualizarResumo();
 filtrarTransacoes("Todos");
