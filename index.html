@@ -14,18 +14,18 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body >
     <div class="sectionHero sections">
       <header class="header-hero pallet-dark">
         <h1 class="header-hero__title">granaboard</h1>
-        <div class="header__lightMode">
+        <div class="header__lightMode pallet-light">
           <input
             type="checkbox"
             id="lightMode"
             class="lightMode__checkbox"
-            checked
+            onchange="alternarTemaGlobal()"
           />
-          <label for="lightMode" class="lightMode__circle"></label>
+          <label for="lightMode" class="lightMode__circle pallet-dark"></label>
         </div>
       </header>
       <section class="content-hero pallet-light">
@@ -110,9 +110,25 @@
     <div class="sectionTransactions sections" id="sectionTransactions">
       <h2 class="sectionTransactions__title">Transações</h2>
       <div class="sectionTransactions__filter pallet-dark">
-        <button onclick="filtrarTransacoes('Todos')">todos</button>
-        <button onclick="filtrarTransacoes('Saída')">saidas</button>
-        <button onclick="filtrarTransacoes('Entrada')">entradas</button>
+        <select name="filter" id="filter">
+          <option value="Todos">Todos</option>
+          <option value="Entrada">Entrada</option>
+          <option value="Saída">Saída</option>
+        </select>
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Pesquisar"
+        />
+        <select name="order" id="order">
+          <option value="descricao" selected>Ordenar por</option>
+          <option value="dataRecente">Data (mais recente)</option>
+          <option value="dataAntiga">Data (mais antiga)</option>
+          <option value="valorMaior">Valor (maior)</option>
+          <option value="valorMenor">Valor (menor)</option>
+        </select>
+        <button class="quebraLinha" onclick="filtrarTransacoes()">filtrar</button>
       </div>
       <div class="content-table">
         <table class="sectionTransactions__table card">
@@ -135,6 +151,18 @@
       <h2>Graficos</h2>
       <canvas id="chartTransacoes" width="400" height="300"></canvas>
     </div>
+
+    <footer class="footer-hero">
+      <p class="footer-hero__text">
+        &copy; 2025 - Desenvolvido por JoelsonDeveloper
+        <a
+          href="https://github.com/joelsondeveloper"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub</a
+        >
+      </p>
+    </footer>
 
     <div id="toast" class="toast">Transação adicionada com sucesso!</div>
 

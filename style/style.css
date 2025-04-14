@@ -19,6 +19,7 @@
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -26,6 +27,7 @@ body {
   font-size: 1.6rem;
   background-color: #d4d8f0;
   font-family: "Inter", sans-serif;
+  overflow-x: hidden;
 }
 
 .pallet-dark {
@@ -60,7 +62,7 @@ body {
   color: var(--paragraph-light-color);
 }
 
-button{
+button {
   background-color: var(--button-color);
   color: var(--paragraph-light-color);
 }
@@ -101,6 +103,41 @@ button{
   padding: 2rem 5%;
 }
 
+.header__lightMode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  /* background-color: var(--back-light-color); */
+  padding: 0.2rem 0.5rem;
+  width: 4rem;
+  border-radius: 1.4rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.lightMode__checkbox {
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.lightMode__circle {
+  cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  /* background-color: #232946; */
+  transition: all 0.3s ease-in-out;
+  transform: translateX(calc(-100% + 0.5rem));
+}
+
+.lightMode__checkbox:checked + .lightMode__circle {
+  transform: translateX(calc(100% - 0.5rem));
+}
+
 .content-hero {
   width: 100%;
   height: 100%;
@@ -112,7 +149,7 @@ button{
 }
 
 .resumeCards {
-  width: 40rem;
+  width: 30rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -168,7 +205,7 @@ table .red-color {
   padding: 4rem 0;
 }
 
-.sectionForm .form{
+.sectionForm .form {
   width: calc(100% - 4rem);
   max-width: 50rem;
   display: flex;
@@ -181,7 +218,7 @@ table .red-color {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.sectionForm .form__inputGroup{
+.sectionForm .form__inputGroup {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -195,7 +232,8 @@ table .red-color {
   color: var(--title-light-color);
 }
 
-.sectionForm input, .sectionForm select {
+.sectionForm input,
+.sectionForm select {
   width: 100%;
   padding: 1rem;
   border-radius: 0.5rem;
@@ -225,7 +263,7 @@ table .red-color {
   padding: 4rem 0;
 }
 
-.sectionTransactions__filter{
+.sectionTransactions__filter {
   width: calc(100% - 4rem);
   max-width: 60rem;
   /* max-width: 50rem; */
@@ -235,15 +273,19 @@ table .red-color {
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.sectionTransactions__filter button {
+.sectionTransactions__filter button, .sectionTransactions__filter select, .sectionTransactions__filter input {
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   border: 1px solid var(--paragraph-light-color);
   font-size: 1.6rem;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  background-color: var(--button-color);
+  color: var(--title-light-color);
 }
 
 .sectionTransactions__filter button:hover {
@@ -252,12 +294,15 @@ table .red-color {
   transform: scale(1.05);
 }
 
-.content-table{
-  width: 99%;
+.quebraLinha {
+}
+
+.content-table {
+  width: 100%;
   max-width: 60rem;
   max-height: 35rem;
   overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-x: auto;
   padding: 2rem 0;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -267,7 +312,7 @@ table .red-color {
   display: none;
 }
 
-.sectionTransactions__table{
+.sectionTransactions__table {
   width: 100%;
   /* max-width: 50rem; */
   border-radius: 1rem;
@@ -276,7 +321,8 @@ table .red-color {
   border-collapse: collapse;
 }
 
-.sectionTransactions__table th, .sectionTransactions__table td {
+.sectionTransactions__table th,
+.sectionTransactions__table td {
   padding: 1rem;
   text-align: center;
   border: 1px solid var(--paragraph-light-color);
@@ -288,8 +334,8 @@ table .red-color {
   flex: 1;
 }
 
-.sectionTransactions__table button{
-  padding: .5rem 1rem;
+.sectionTransactions__table button {
+  padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   border: 1px solid var(--paragraph-light-color);
   font-size: 1.6rem;
@@ -301,6 +347,17 @@ table .red-color {
   background-color: var(--card-light-color);
   color: var(--title-light-color);
   transform: scale(1.05);
+}
+
+@media (max-width: 420px) {
+  .sectionTransactions__table th, .sectionTransactions__table td {
+    font-size: 1.4rem;  /* Ajuste o tamanho da fonte para telas pequenas */
+    padding: 0.6rem;
+  }
+  
+  .content-table {
+    padding: 1rem;  /* Reduzindo o padding para não cortar a tabela */
+  }
 }
 
 /* toast */
@@ -321,4 +378,28 @@ table .red-color {
 .toast.show {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* footer */
+footer {
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--back-dark-color);
+  color: var(--title-dark-color);
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+footer a {
+  text-decoration: none;
+  color: var(--button-color);
+  transition: all 0.3s ease-in-out;
+}
+
+footer a:hover {
+  color: var(--title-dark-color);
+  transform: scale(1.05);
 }

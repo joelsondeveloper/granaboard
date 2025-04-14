@@ -4,10 +4,23 @@ const table = document.getElementById("transactionsTableBody");
 
 function filtrarTransacoes(tipo) {
   table.innerHTML = "";
+  const select = document.getElementById("filter").value;
+  const search = document.getElementById("search");
+  const order = document.getElementById("order").value;
+  
+  ordenarTransacoes(order);
   transacoes.forEach(function (el) {
-    if (el.tipo === tipo) {
-      criarLinhaDaTabela(el);
-    } else if (tipo === "Todos") {
+    if (search.value == "") {
+      if (select === "Todos") {
+        criarLinhaDaTabela(el);
+      } else if (el.tipo === select) {
+        criarLinhaDaTabela(el);
+      }
+    } else if (
+      el.descricao.toLowerCase().includes(search.value.toLowerCase()) &&
+      (select === "Todos" || el.tipo === select) &&
+      search.value != ""
+    ) {
       criarLinhaDaTabela(el);
     }
   });
@@ -43,6 +56,22 @@ function criarLinhaDaTabela(el) {
             `;
   table.appendChild(row);
   atualizarResumo();
+}
+
+function ordenarTransacoes(criterio) {
+  transacoes.sort(function (a, b) {
+    if (criterio === "dataRecente") {
+      return new Date(b.data) - new Date(a.data);
+    } else if (criterio === "dataAntiga") {
+      return new Date(a.data) - new Date(b.data);
+    } else if (criterio === "valorMaior") {
+      return b.valor - a.valor;
+    } else if (criterio === "valorMenor") {
+      return a.valor - b.valor;
+    } else {
+      return 0;
+    }
+  })
 }
 
 function atualizarResumo() {
@@ -137,9 +166,21 @@ function mostrarToast(mensagem) {
 
   setTimeout(() => {
     toast.classList.remove("show");
-  }, 3000); // esconde depois de 3 segundos
+  }, 3000);
 }
 
+function alternarTemaGlobal() {
+  const secoes = document.querySelectorAll(".pallet-light, .pallet-dark");
+  secoes.forEach((secao) => {
+    if (secao.classList.contains("pallet-light")) {
+      secao.classList.remove("pallet-light");
+      secao.classList.add("pallet-dark");
+    } else {
+      secao.classList.remove("pallet-dark");
+      secao.classList.add("pallet-light");
+    }
+  })
+}
 
 atualizarResumo();
 filtrarTransacoes("Todos");
